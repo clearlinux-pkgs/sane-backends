@@ -4,7 +4,7 @@
 #
 Name     : sane-backends
 Version  : 1.0.27
-Release  : 1
+Release  : 2
 URL      : https://alioth.debian.org/frs/download.php/file/4224/sane-backends-1.0.27.tar.gz
 Source0  : https://alioth.debian.org/frs/download.php/file/4224/sane-backends-1.0.27.tar.gz
 Summary  : Backends for SANE, the universal scanner interface

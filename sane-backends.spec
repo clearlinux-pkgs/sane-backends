@@ -4,16 +4,17 @@
 #
 Name     : sane-backends
 Version  : 1.0.27
-Release  : 2
-URL      : https://alioth.debian.org/frs/download.php/file/4224/sane-backends-1.0.27.tar.gz
-Source0  : https://alioth.debian.org/frs/download.php/file/4224/sane-backends-1.0.27.tar.gz
+Release  : 3
+URL      : https://gitlab.com/sane-project/backends/uploads/a3ba9fff29253a94e84074917bff581a/sane-backends-1.0.27.tar.gz
+Source0  : https://gitlab.com/sane-project/backends/uploads/a3ba9fff29253a94e84074917bff581a/sane-backends-1.0.27.tar.gz
 Summary  : Backends for SANE, the universal scanner interface
 Group    : Development/Tools
 License  : GPL-2.0
-Requires: sane-backends-bin
-Requires: sane-backends-lib
-Requires: sane-backends-doc
-Requires: sane-backends-locales
+Requires: sane-backends-bin = %{version}-%{release}
+Requires: sane-backends-lib = %{version}-%{release}
+Requires: sane-backends-license = %{version}-%{release}
+Requires: sane-backends-locales = %{version}-%{release}
+Requires: sane-backends-man = %{version}-%{release}
 BuildRequires : ghostscript
 BuildRequires : libjpeg-turbo-dev
 BuildRequires : pkgconfig(libsystemd)
@@ -33,6 +34,8 @@ You always find the most recent version of SANE on:
 %package bin
 Summary: bin components for the sane-backends package.
 Group: Binaries
+Requires: sane-backends-license = %{version}-%{release}
+Requires: sane-backends-man = %{version}-%{release}
 
 %description bin
 bin components for the sane-backends package.
@@ -41,9 +44,9 @@ bin components for the sane-backends package.
 %package dev
 Summary: dev components for the sane-backends package.
 Group: Development
-Requires: sane-backends-lib
-Requires: sane-backends-bin
-Provides: sane-backends-devel
+Requires: sane-backends-lib = %{version}-%{release}
+Requires: sane-backends-bin = %{version}-%{release}
+Provides: sane-backends-devel = %{version}-%{release}
 
 %description dev
 dev components for the sane-backends package.
@@ -52,6 +55,7 @@ dev components for the sane-backends package.
 %package doc
 Summary: doc components for the sane-backends package.
 Group: Documentation
+Requires: sane-backends-man = %{version}-%{release}
 
 %description doc
 doc components for the sane-backends package.
@@ -60,9 +64,18 @@ doc components for the sane-backends package.
 %package lib
 Summary: lib components for the sane-backends package.
 Group: Libraries
+Requires: sane-backends-license = %{version}-%{release}
 
 %description lib
 lib components for the sane-backends package.
+
+
+%package license
+Summary: license components for the sane-backends package.
+Group: Default
+
+%description license
+license components for the sane-backends package.
 
 
 %package locales
@@ -73,6 +86,14 @@ Group: Default
 locales components for the sane-backends package.
 
 
+%package man
+Summary: man components for the sane-backends package.
+Group: Default
+
+%description man
+man components for the sane-backends package.
+
+
 %prep
 %setup -q -n sane-backends-1.0.27
 
@@ -81,7 +102,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1523660667
+export SOURCE_DATE_EPOCH=1540233750
 %configure --disable-static --disable-avahi
 make  %{?_smp_mflags}
 
@@ -93,8 +114,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1523660667
+export SOURCE_DATE_EPOCH=1540233750
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/sane-backends
+cp COPYING %{buildroot}/usr/share/package-licenses/sane-backends/COPYING
 %make_install
 %find_lang sane-backends
 
@@ -118,12 +141,8 @@ rm -rf %{buildroot}
 /usr/lib64/pkgconfig/sane-backends.pc
 
 %files doc
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 %doc /usr/share/doc/sane\-backends/*
-%doc /usr/share/man/man1/*
-%doc /usr/share/man/man5/*
-%doc /usr/share/man/man7/*
-%doc /usr/share/man/man8/*
 
 %files lib
 %defattr(-,root,root,-)
@@ -378,6 +397,104 @@ rm -rf %{buildroot}
 /usr/lib64/sane/libsane-xerox_mfp.so
 /usr/lib64/sane/libsane-xerox_mfp.so.1
 /usr/lib64/sane/libsane-xerox_mfp.so.1.0.27
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/sane-backends/COPYING
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/gamma4scanimage.1
+/usr/share/man/man1/sane-config.1
+/usr/share/man/man1/sane-find-scanner.1
+/usr/share/man/man1/scanimage.1
+/usr/share/man/man5/sane-abaton.5
+/usr/share/man/man5/sane-agfafocus.5
+/usr/share/man/man5/sane-apple.5
+/usr/share/man/man5/sane-artec.5
+/usr/share/man/man5/sane-artec_eplus48u.5
+/usr/share/man/man5/sane-as6e.5
+/usr/share/man/man5/sane-avision.5
+/usr/share/man/man5/sane-bh.5
+/usr/share/man/man5/sane-canon.5
+/usr/share/man/man5/sane-canon630u.5
+/usr/share/man/man5/sane-canon_dr.5
+/usr/share/man/man5/sane-cardscan.5
+/usr/share/man/man5/sane-coolscan.5
+/usr/share/man/man5/sane-coolscan2.5
+/usr/share/man/man5/sane-coolscan3.5
+/usr/share/man/man5/sane-dc210.5
+/usr/share/man/man5/sane-dc240.5
+/usr/share/man/man5/sane-dc25.5
+/usr/share/man/man5/sane-dll.5
+/usr/share/man/man5/sane-dmc.5
+/usr/share/man/man5/sane-epjitsu.5
+/usr/share/man/man5/sane-epson.5
+/usr/share/man/man5/sane-epson2.5
+/usr/share/man/man5/sane-epsonds.5
+/usr/share/man/man5/sane-fujitsu.5
+/usr/share/man/man5/sane-genesys.5
+/usr/share/man/man5/sane-gt68xx.5
+/usr/share/man/man5/sane-hp.5
+/usr/share/man/man5/sane-hp3500.5
+/usr/share/man/man5/sane-hp3900.5
+/usr/share/man/man5/sane-hp4200.5
+/usr/share/man/man5/sane-hp5400.5
+/usr/share/man/man5/sane-hp5590.5
+/usr/share/man/man5/sane-hpljm1005.5
+/usr/share/man/man5/sane-hs2p.5
+/usr/share/man/man5/sane-ibm.5
+/usr/share/man/man5/sane-kodak.5
+/usr/share/man/man5/sane-kodakaio.5
+/usr/share/man/man5/sane-kvs1025.5
+/usr/share/man/man5/sane-kvs20xx.5
+/usr/share/man/man5/sane-kvs40xx.5
+/usr/share/man/man5/sane-leo.5
+/usr/share/man/man5/sane-lexmark.5
+/usr/share/man/man5/sane-ma1509.5
+/usr/share/man/man5/sane-magicolor.5
+/usr/share/man/man5/sane-matsushita.5
+/usr/share/man/man5/sane-microtek.5
+/usr/share/man/man5/sane-microtek2.5
+/usr/share/man/man5/sane-mustek.5
+/usr/share/man/man5/sane-mustek_usb.5
+/usr/share/man/man5/sane-mustek_usb2.5
+/usr/share/man/man5/sane-nec.5
+/usr/share/man/man5/sane-net.5
+/usr/share/man/man5/sane-niash.5
+/usr/share/man/man5/sane-p5.5
+/usr/share/man/man5/sane-pie.5
+/usr/share/man/man5/sane-pieusb.5
+/usr/share/man/man5/sane-pixma.5
+/usr/share/man/man5/sane-plustek.5
+/usr/share/man/man5/sane-plustek_pp.5
+/usr/share/man/man5/sane-qcam.5
+/usr/share/man/man5/sane-ricoh.5
+/usr/share/man/man5/sane-rts8891.5
+/usr/share/man/man5/sane-s9036.5
+/usr/share/man/man5/sane-sceptre.5
+/usr/share/man/man5/sane-scsi.5
+/usr/share/man/man5/sane-sharp.5
+/usr/share/man/man5/sane-sm3600.5
+/usr/share/man/man5/sane-sm3840.5
+/usr/share/man/man5/sane-snapscan.5
+/usr/share/man/man5/sane-sp15c.5
+/usr/share/man/man5/sane-st400.5
+/usr/share/man/man5/sane-stv680.5
+/usr/share/man/man5/sane-tamarack.5
+/usr/share/man/man5/sane-teco1.5
+/usr/share/man/man5/sane-teco2.5
+/usr/share/man/man5/sane-teco3.5
+/usr/share/man/man5/sane-test.5
+/usr/share/man/man5/sane-u12.5
+/usr/share/man/man5/sane-umax.5
+/usr/share/man/man5/sane-umax1220u.5
+/usr/share/man/man5/sane-umax_pp.5
+/usr/share/man/man5/sane-usb.5
+/usr/share/man/man5/sane-v4l.5
+/usr/share/man/man5/sane-xerox_mfp.5
+/usr/share/man/man7/sane.7
+/usr/share/man/man8/saned.8
 
 %files locales -f sane-backends.lang
 %defattr(-,root,root,-)

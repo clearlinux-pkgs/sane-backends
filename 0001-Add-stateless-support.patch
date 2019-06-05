@@ -1,0 +1,39 @@
+From 33b5d62c377ef6d509cbe1af01da6824a7b5d74e Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Wed, 5 Jun 2019 09:30:35 -0700
+Subject: [PATCH] Add stateless support
+
+---
+ configure            | 2 +-
+ sanei/sanei_config.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configure b/configure
+index 216aaea..70fb8e8 100755
+--- a/configure
++++ b/configure
+@@ -20581,7 +20581,7 @@ fi
+ 
+ 
+ 
+-configdir="${sysconfdir}/sane.d"
++configdir="${sysconfdir}/sane"
+ 
+ 
+ 
+diff --git a/sanei/sanei_config.c b/sanei/sanei_config.c
+index c158766..1b5c0bc 100644
+--- a/sanei/sanei_config.c
++++ b/sanei/sanei_config.c
+@@ -67,7 +67,7 @@
+ # define PATH_SEP	'/'
+ #endif
+ 
+-#define DEFAULT_DIRS	"." DIR_SEP STRINGIFY(PATH_SANE_CONFIG_DIR)
++#define DEFAULT_DIRS	"." DIR_SEP "/etc/sane.d" DIR_SEP STRINGIFY(PATH_SANE_CONFIG_DIR)
+ 
+ #ifdef __BEOS__
+ #include <FindDirectory.h>
+-- 
+2.21.0
+

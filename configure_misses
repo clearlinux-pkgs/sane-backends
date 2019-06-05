@@ -1,7 +1,6 @@
 Configure miss: sane-config
 Configure miss: le32toh in machine/endian.h
 Configure miss: swap32 in machine/endian.h
-Configure miss: TIFFFdOpen in -ltiff
 Configure miss: png_init_io in -lpng
 Configure miss: ieee1284.h usability
 Configure miss: ieee1284.h presence
@@ -35,9 +34,6 @@ Configure miss: machine/cpufunc.h
 Configure miss: be/kernel/OS.h usability
 Configure miss: be/kernel/OS.h presence
 Configure miss: be/kernel/OS.h
-Configure miss: tiffio.h usability
-Configure miss: tiffio.h presence
-Configure miss: tiffio.h
 Configure miss: asm/io.h
 Configure miss: winsock2.h usability
 Configure miss: winsock2.h presence

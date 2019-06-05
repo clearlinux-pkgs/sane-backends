@@ -4,13 +4,14 @@
 #
 Name     : sane-backends
 Version  : 1.0.27
-Release  : 4
+Release  : 5
 URL      : https://gitlab.com/sane-project/backends/uploads/a3ba9fff29253a94e84074917bff581a/sane-backends-1.0.27.tar.gz
 Source0  : https://gitlab.com/sane-project/backends/uploads/a3ba9fff29253a94e84074917bff581a/sane-backends-1.0.27.tar.gz
 Summary  : Backends for SANE, the universal scanner interface
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: sane-backends-bin = %{version}-%{release}
+Requires: sane-backends-data = %{version}-%{release}
 Requires: sane-backends-lib = %{version}-%{release}
 Requires: sane-backends-license = %{version}-%{release}
 Requires: sane-backends-locales = %{version}-%{release}
@@ -21,6 +22,8 @@ BuildRequires : pkgconfig(libsystemd)
 BuildRequires : pkgconfig(libusb-1.0)
 BuildRequires : pkgconfig(libv4l1)
 BuildRequires : systemd-dev
+BuildRequires : tiff-dev
+Patch1: 0001-Add-stateless-support.patch
 
 %description
 How to configure, build, and install SANE.
@@ -34,11 +37,19 @@ You always find the most recent version of SANE on:
 %package bin
 Summary: bin components for the sane-backends package.
 Group: Binaries
+Requires: sane-backends-data = %{version}-%{release}
 Requires: sane-backends-license = %{version}-%{release}
-Requires: sane-backends-man = %{version}-%{release}
 
 %description bin
 bin components for the sane-backends package.
+
+
+%package data
+Summary: data components for the sane-backends package.
+Group: Data
+
+%description data
+data components for the sane-backends package.
 
 
 %package dev
@@ -46,7 +57,9 @@ Summary: dev components for the sane-backends package.
 Group: Development
 Requires: sane-backends-lib = %{version}-%{release}
 Requires: sane-backends-bin = %{version}-%{release}
+Requires: sane-backends-data = %{version}-%{release}
 Provides: sane-backends-devel = %{version}-%{release}
+Requires: sane-backends = %{version}-%{release}
 
 %description dev
 dev components for the sane-backends package.
@@ -64,6 +77,7 @@ doc components for the sane-backends package.
 %package lib
 Summary: lib components for the sane-backends package.
 Group: Libraries
+Requires: sane-backends-data = %{version}-%{release}
 Requires: sane-backends-license = %{version}-%{release}
 
 %description lib
@@ -96,14 +110,24 @@ man components for the sane-backends package.
 
 %prep
 %setup -q -n sane-backends-1.0.27
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1540233750
-%configure --disable-static --disable-avahi
+export SOURCE_DATE_EPOCH=1559760886
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+%configure --disable-static --disable-avahi \
+--sysconfdir=/usr/share/defaults
 make  %{?_smp_mflags}
 
 %check
@@ -114,7 +138,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1540233750
+export SOURCE_DATE_EPOCH=1559760886
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sane-backends
 cp COPYING %{buildroot}/usr/share/package-licenses/sane-backends/COPYING
@@ -132,6 +156,85 @@ cp COPYING %{buildroot}/usr/share/package-licenses/sane-backends/COPYING
 /usr/bin/saned
 /usr/bin/scanimage
 /usr/bin/umax_pp
+
+%files data
+%defattr(-,root,root,-)
+/usr/share/defaults/sane/abaton.conf
+/usr/share/defaults/sane/agfafocus.conf
+/usr/share/defaults/sane/apple.conf
+/usr/share/defaults/sane/artec.conf
+/usr/share/defaults/sane/artec_eplus48u.conf
+/usr/share/defaults/sane/avision.conf
+/usr/share/defaults/sane/bh.conf
+/usr/share/defaults/sane/canon.conf
+/usr/share/defaults/sane/canon630u.conf
+/usr/share/defaults/sane/canon_dr.conf
+/usr/share/defaults/sane/cardscan.conf
+/usr/share/defaults/sane/coolscan.conf
+/usr/share/defaults/sane/coolscan2.conf
+/usr/share/defaults/sane/coolscan3.conf
+/usr/share/defaults/sane/dc210.conf
+/usr/share/defaults/sane/dc240.conf
+/usr/share/defaults/sane/dc25.conf
+/usr/share/defaults/sane/dell1600n_net.conf
+/usr/share/defaults/sane/dll.conf
+/usr/share/defaults/sane/dmc.conf
+/usr/share/defaults/sane/epjitsu.conf
+/usr/share/defaults/sane/epson.conf
+/usr/share/defaults/sane/epson2.conf
+/usr/share/defaults/sane/epsonds.conf
+/usr/share/defaults/sane/fujitsu.conf
+/usr/share/defaults/sane/genesys.conf
+/usr/share/defaults/sane/gt68xx.conf
+/usr/share/defaults/sane/hp.conf
+/usr/share/defaults/sane/hp3900.conf
+/usr/share/defaults/sane/hp4200.conf
+/usr/share/defaults/sane/hp5400.conf
+/usr/share/defaults/sane/hs2p.conf
+/usr/share/defaults/sane/ibm.conf
+/usr/share/defaults/sane/kodak.conf
+/usr/share/defaults/sane/kodakaio.conf
+/usr/share/defaults/sane/kvs1025.conf
+/usr/share/defaults/sane/leo.conf
+/usr/share/defaults/sane/lexmark.conf
+/usr/share/defaults/sane/ma1509.conf
+/usr/share/defaults/sane/magicolor.conf
+/usr/share/defaults/sane/matsushita.conf
+/usr/share/defaults/sane/microtek.conf
+/usr/share/defaults/sane/microtek2.conf
+/usr/share/defaults/sane/mustek.conf
+/usr/share/defaults/sane/mustek_usb.conf
+/usr/share/defaults/sane/nec.conf
+/usr/share/defaults/sane/net.conf
+/usr/share/defaults/sane/p5.conf
+/usr/share/defaults/sane/pie.conf
+/usr/share/defaults/sane/pieusb.conf
+/usr/share/defaults/sane/pixma.conf
+/usr/share/defaults/sane/plustek.conf
+/usr/share/defaults/sane/plustek_pp.conf
+/usr/share/defaults/sane/qcam.conf
+/usr/share/defaults/sane/ricoh.conf
+/usr/share/defaults/sane/rts8891.conf
+/usr/share/defaults/sane/s9036.conf
+/usr/share/defaults/sane/saned.conf
+/usr/share/defaults/sane/sceptre.conf
+/usr/share/defaults/sane/sharp.conf
+/usr/share/defaults/sane/sm3840.conf
+/usr/share/defaults/sane/snapscan.conf
+/usr/share/defaults/sane/sp15c.conf
+/usr/share/defaults/sane/st400.conf
+/usr/share/defaults/sane/stv680.conf
+/usr/share/defaults/sane/tamarack.conf
+/usr/share/defaults/sane/teco1.conf
+/usr/share/defaults/sane/teco2.conf
+/usr/share/defaults/sane/teco3.conf
+/usr/share/defaults/sane/test.conf
+/usr/share/defaults/sane/u12.conf
+/usr/share/defaults/sane/umax.conf
+/usr/share/defaults/sane/umax1220u.conf
+/usr/share/defaults/sane/umax_pp.conf
+/usr/share/defaults/sane/v4l.conf
+/usr/share/defaults/sane/xerox_mfp.conf
 
 %files dev
 %defattr(-,root,root,-)
@@ -202,6 +305,9 @@ cp COPYING %{buildroot}/usr/share/package-licenses/sane-backends/COPYING
 /usr/lib64/sane/libsane-dc25.so
 /usr/lib64/sane/libsane-dc25.so.1
 /usr/lib64/sane/libsane-dc25.so.1.0.27
+/usr/lib64/sane/libsane-dell1600n_net.so
+/usr/lib64/sane/libsane-dell1600n_net.so.1
+/usr/lib64/sane/libsane-dell1600n_net.so.1.0.27
 /usr/lib64/sane/libsane-dll.so
 /usr/lib64/sane/libsane-dll.so.1
 /usr/lib64/sane/libsane-dll.so.1.0.27

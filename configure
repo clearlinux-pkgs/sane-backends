@@ -1,1 +1,2 @@
 --disable-avahi
+--sysconfdir=/usr/share/defaults

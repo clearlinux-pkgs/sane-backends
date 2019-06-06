@@ -1,12 +1,13 @@
-From 33b5d62c377ef6d509cbe1af01da6824a7b5d74e Mon Sep 17 00:00:00 2001
+From c26f8269de1f8b01c72ecefa7a222020d6c8edd3 Mon Sep 17 00:00:00 2001
 From: "Brett T. Warden" <brett.t.warden@intel.com>
 Date: Wed, 5 Jun 2019 09:30:35 -0700
 Subject: [PATCH] Add stateless support
 
 ---
  configure            | 2 +-
+ doc/Makefile.in      | 2 +-
  sanei/sanei_config.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/configure b/configure
 index 216aaea..70fb8e8 100755
@@ -21,6 +22,19 @@ index 216aaea..70fb8e8 100755
  
  
  
+diff --git a/doc/Makefile.in b/doc/Makefile.in
+index d678cf1..4975aaa 100644
+--- a/doc/Makefile.in
++++ b/doc/Makefile.in
+@@ -939,7 +939,7 @@ all: bemans $(API_SPECS) html-pages
+ %.1 %.5 %.7 %.8: %.man
+ 	@echo "Generating manpage $@...";
+ 	@sed -e 's|@DATADIR@|$(datadir)|g' \
+-	  -e 's|@CONFIGDIR@|$(configdir)|g' \
++	  -e 's|@CONFIGDIR@|/etc/sane.d|g' \
+ 	  -e 's|@DOCDIR@|$(docdir)|g' \
+ 	  -e 's|@LIBDIR@|$(libdir)/sane|g' \
+ 	  -e 's|@BINDIR@|$(bindir)|g' \
 diff --git a/sanei/sanei_config.c b/sanei/sanei_config.c
 index c158766..1b5c0bc 100644
 --- a/sanei/sanei_config.c

@@ -4,7 +4,7 @@
 #
 Name     : sane-backends
 Version  : 1.0.27
-Release  : 5
+Release  : 6
 URL      : https://gitlab.com/sane-project/backends/uploads/a3ba9fff29253a94e84074917bff581a/sane-backends-1.0.27.tar.gz
 Source0  : https://gitlab.com/sane-project/backends/uploads/a3ba9fff29253a94e84074917bff581a/sane-backends-1.0.27.tar.gz
 Summary  : Backends for SANE, the universal scanner interface
@@ -117,7 +117,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1559760886
+export SOURCE_DATE_EPOCH=1559864032
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -138,7 +138,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1559760886
+export SOURCE_DATE_EPOCH=1559864032
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sane-backends
 cp COPYING %{buildroot}/usr/share/package-licenses/sane-backends/COPYING

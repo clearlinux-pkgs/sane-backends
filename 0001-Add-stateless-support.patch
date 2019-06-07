@@ -1,42 +1,14 @@
-From c26f8269de1f8b01c72ecefa7a222020d6c8edd3 Mon Sep 17 00:00:00 2001
+From b0a8a1c3f90c45bf9429271d5b88ba1194151927 Mon Sep 17 00:00:00 2001
 From: "Brett T. Warden" <brett.t.warden@intel.com>
-Date: Wed, 5 Jun 2019 09:30:35 -0700
+Date: Fri, 7 Jun 2019 08:56:40 -0700
 Subject: [PATCH] Add stateless support
 
 ---
- configure            | 2 +-
- doc/Makefile.in      | 2 +-
  sanei/sanei_config.c | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configure b/configure
-index 216aaea..70fb8e8 100755
---- a/configure
-+++ b/configure
-@@ -20581,7 +20581,7 @@ fi
- 
- 
- 
--configdir="${sysconfdir}/sane.d"
-+configdir="${sysconfdir}/sane"
- 
- 
- 
-diff --git a/doc/Makefile.in b/doc/Makefile.in
-index d678cf1..4975aaa 100644
---- a/doc/Makefile.in
-+++ b/doc/Makefile.in
-@@ -939,7 +939,7 @@ all: bemans $(API_SPECS) html-pages
- %.1 %.5 %.7 %.8: %.man
- 	@echo "Generating manpage $@...";
- 	@sed -e 's|@DATADIR@|$(datadir)|g' \
--	  -e 's|@CONFIGDIR@|$(configdir)|g' \
-+	  -e 's|@CONFIGDIR@|/etc/sane.d|g' \
- 	  -e 's|@DOCDIR@|$(docdir)|g' \
- 	  -e 's|@LIBDIR@|$(libdir)/sane|g' \
- 	  -e 's|@BINDIR@|$(bindir)|g' \
 diff --git a/sanei/sanei_config.c b/sanei/sanei_config.c
-index c158766..1b5c0bc 100644
+index c158766..ae901e9 100644
 --- a/sanei/sanei_config.c
 +++ b/sanei/sanei_config.c
 @@ -67,7 +67,7 @@
@@ -44,7 +16,7 @@ index c158766..1b5c0bc 100644
  #endif
  
 -#define DEFAULT_DIRS	"." DIR_SEP STRINGIFY(PATH_SANE_CONFIG_DIR)
-+#define DEFAULT_DIRS	"." DIR_SEP "/etc/sane.d" DIR_SEP STRINGIFY(PATH_SANE_CONFIG_DIR)
++#define DEFAULT_DIRS	"." DIR_SEP STRINGIFY(PATH_SANE_CONFIG_DIR) DIR_SEP "/usr/share/defaults/sane"
  
  #ifdef __BEOS__
  #include <FindDirectory.h>

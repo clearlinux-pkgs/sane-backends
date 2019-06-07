@@ -4,7 +4,7 @@
 #
 Name     : sane-backends
 Version  : 1.0.27
-Release  : 6
+Release  : 7
 URL      : https://gitlab.com/sane-project/backends/uploads/a3ba9fff29253a94e84074917bff581a/sane-backends-1.0.27.tar.gz
 Source0  : https://gitlab.com/sane-project/backends/uploads/a3ba9fff29253a94e84074917bff581a/sane-backends-1.0.27.tar.gz
 Summary  : Backends for SANE, the universal scanner interface
@@ -117,7 +117,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1559864032
+export SOURCE_DATE_EPOCH=1559923868
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -126,8 +126,7 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
-%configure --disable-static --disable-avahi \
---sysconfdir=/usr/share/defaults
+%configure --disable-static --disable-avahi
 make  %{?_smp_mflags}
 
 %check
@@ -138,12 +137,16 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1559864032
+export SOURCE_DATE_EPOCH=1559923868
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sane-backends
 cp COPYING %{buildroot}/usr/share/package-licenses/sane-backends/COPYING
 %make_install
 %find_lang sane-backends
+## install_append content
+mkdir -p %{buildroot}/usr/share/defaults/sane
+mv %{buildroot}/etc/sane.d/* %{buildroot}/usr/share/defaults/sane/
+## install_append end
 
 %files
 %defattr(-,root,root,-)

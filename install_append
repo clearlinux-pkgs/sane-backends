@@ -1,0 +1,2 @@
+mkdir -p %{buildroot}/usr/share/defaults/sane
+mv %{buildroot}/etc/sane.d/* %{buildroot}/usr/share/defaults/sane/

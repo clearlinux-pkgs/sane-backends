@@ -4,13 +4,14 @@
 #
 Name     : sane-backends
 Version  : 1.0.27
-Release  : 7
+Release  : 8
 URL      : https://gitlab.com/sane-project/backends/uploads/a3ba9fff29253a94e84074917bff581a/sane-backends-1.0.27.tar.gz
 Source0  : https://gitlab.com/sane-project/backends/uploads/a3ba9fff29253a94e84074917bff581a/sane-backends-1.0.27.tar.gz
 Summary  : Backends for SANE, the universal scanner interface
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: sane-backends-bin = %{version}-%{release}
+Requires: sane-backends-config = %{version}-%{release}
 Requires: sane-backends-data = %{version}-%{release}
 Requires: sane-backends-lib = %{version}-%{release}
 Requires: sane-backends-license = %{version}-%{release}
@@ -38,10 +39,19 @@ You always find the most recent version of SANE on:
 Summary: bin components for the sane-backends package.
 Group: Binaries
 Requires: sane-backends-data = %{version}-%{release}
+Requires: sane-backends-config = %{version}-%{release}
 Requires: sane-backends-license = %{version}-%{release}
 
 %description bin
 bin components for the sane-backends package.
+
+
+%package config
+Summary: config components for the sane-backends package.
+Group: Default
+
+%description config
+config components for the sane-backends package.
 
 
 %package data
@@ -117,7 +127,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1559923868
+export SOURCE_DATE_EPOCH=1561061740
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -137,7 +147,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1559923868
+export SOURCE_DATE_EPOCH=1561061740
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sane-backends
 cp COPYING %{buildroot}/usr/share/package-licenses/sane-backends/COPYING
@@ -146,6 +156,8 @@ cp COPYING %{buildroot}/usr/share/package-licenses/sane-backends/COPYING
 ## install_append content
 mkdir -p %{buildroot}/usr/share/defaults/sane
 mv %{buildroot}/etc/sane.d/* %{buildroot}/usr/share/defaults/sane/
+mkdir -p %{buildroot}/usr/lib/udev/rules.d
+install -m0644 tools/udev/libsane.rules %{buildroot}/usr/lib/udev/rules.d/60-libsane.rules
 ## install_append end
 
 %files
@@ -159,6 +171,10 @@ mv %{buildroot}/etc/sane.d/* %{buildroot}/usr/share/defaults/sane/
 /usr/bin/saned
 /usr/bin/scanimage
 /usr/bin/umax_pp
+
+%files config
+%defattr(-,root,root,-)
+/usr/lib/udev/rules.d/60-libsane.rules
 
 %files data
 %defattr(-,root,root,-)

@@ -5,6 +5,7 @@ Configure miss: png_init_io in -lpng
 Configure miss: ieee1284.h usability
 Configure miss: ieee1284.h presence
 Configure miss: ieee1284.h
+Configure miss: whether to enable device locking
 Configure miss: sane_init in -lsane
 Configure miss: net-snmp-config
 Configure miss: snmp_timeout in -lnetsnmp

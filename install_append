@@ -1,2 +1,4 @@
 mkdir -p %{buildroot}/usr/share/defaults/sane
 mv %{buildroot}/etc/sane.d/* %{buildroot}/usr/share/defaults/sane/
+mkdir -p %{buildroot}/usr/lib/udev/rules.d
+install -m0644 tools/udev/libsane.rules %{buildroot}/usr/lib/udev/rules.d/60-libsane.rules

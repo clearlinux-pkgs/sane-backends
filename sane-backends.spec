@@ -4,7 +4,7 @@
 #
 Name     : sane-backends
 Version  : 1.0.27
-Release  : 8
+Release  : 9
 URL      : https://gitlab.com/sane-project/backends/uploads/a3ba9fff29253a94e84074917bff581a/sane-backends-1.0.27.tar.gz
 Source0  : https://gitlab.com/sane-project/backends/uploads/a3ba9fff29253a94e84074917bff581a/sane-backends-1.0.27.tar.gz
 Summary  : Backends for SANE, the universal scanner interface
@@ -17,6 +17,7 @@ Requires: sane-backends-lib = %{version}-%{release}
 Requires: sane-backends-license = %{version}-%{release}
 Requires: sane-backends-locales = %{version}-%{release}
 Requires: sane-backends-man = %{version}-%{release}
+Requires: imagescan
 BuildRequires : ghostscript
 BuildRequires : libjpeg-turbo-dev
 BuildRequires : pkgconfig(libsystemd)
@@ -126,8 +127,8 @@ man components for the sane-backends package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1561061740
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1562185930
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -140,14 +141,14 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1561061740
+export SOURCE_DATE_EPOCH=1562185930
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sane-backends
 cp COPYING %{buildroot}/usr/share/package-licenses/sane-backends/COPYING

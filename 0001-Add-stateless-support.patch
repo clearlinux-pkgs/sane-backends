@@ -1,7 +1,7 @@
-From b0a8a1c3f90c45bf9429271d5b88ba1194151927 Mon Sep 17 00:00:00 2001
+From cae2b341c35f35fd7bff7c9809c348cd0be5143e Mon Sep 17 00:00:00 2001
 From: "Brett T. Warden" <brett.t.warden@intel.com>
 Date: Fri, 7 Jun 2019 08:56:40 -0700
-Subject: [PATCH] Add stateless support
+Subject: [PATCH 1/2] Add stateless support
 
 ---
  sanei/sanei_config.c | 2 +-
@@ -21,5 +21,5 @@ index c158766..ae901e9 100644
  #ifdef __BEOS__
  #include <FindDirectory.h>
 -- 
-2.21.0
+2.23.0
 

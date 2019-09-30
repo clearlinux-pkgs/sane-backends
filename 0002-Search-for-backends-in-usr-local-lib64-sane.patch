@@ -1,0 +1,50 @@
+From e7005c4173341d7a63c3cd41c8623b07fda4773a Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Fri, 27 Sep 2019 12:20:17 -0700
+Subject: [PATCH 2/2] Search for backends in /usr/local/lib64/sane
+
+The scanner driver backends provided with sane-backends are installed
+under /usr/lib64/sane, and that's where sane will search for them. With
+this patch, I add an additional directory, /usr/local/lib64/sane, in
+which to search.
+
+Functionally, this allows users to add precompiled backends provided by
+hardware manufacturers.
+
+In the current approach, I've added the new path first, so
+user-installed drivers take precedence over CL-provided drivers. The
+downside is that for every dlopen, it will first try the unlikely path
+before falling back to /usr/lib64/sane.
+
+For example, you might see this pattern for an included backend:
+openat(AT_FDCWD, "/usr/local/lib64/sane/libsane-xerox_mfp.so.1", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib64/sane/libsane-xerox_mfp.so.1", O_RDONLY) = 3</usr/lib64/sane/libsane-xerox_mfp.so.1.0.27>
+openat(AT_FDCWD, "/usr/lib64/sane/libsane-xerox_mfp.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib64/sane/libsane-xerox_mfp.so.1.0.27>
+
+But this pattern for a driver I downloaded myself:
+openat(AT_FDCWD, "/usr/local/lib64/sane/libsane-brother4.so.1", O_RDONLY) = 9</usr/local/lib64/sane/libsane-brother4.so.1.0.7>
+openat(AT_FDCWD, "/usr/local/lib64/sane/libsane-brother4.so.1", O_RDONLY|O_CLOEXEC) = 9</usr/local/lib64/sane/libsane-brother4.so.1.0.7>
+
+A similar behavior can be achieved at runtime by defining
+LD_LIBRARY_PATH; the backend loader will prepend that to LIBDIR, so this
+is just making it a default behavior.
+---
+ backend/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/backend/Makefile.am b/backend/Makefile.am
+index f7fb403..68325b8 100644
+--- a/backend/Makefile.am
++++ b/backend/Makefile.am
+@@ -4,7 +4,7 @@
+ ##  This file is part of the "Sane" build infra-structure.  See
+ ##  included LICENSE file for license information.
+ 
+-AM_CPPFLAGS += -I. -I$(srcdir) -I$(top_builddir)/include -I$(top_srcdir)/include $(USB_CFLAGS) -DLIBDIR="\"$(libdir)/sane\""
++AM_CPPFLAGS += -I. -I$(srcdir) -I$(top_builddir)/include -I$(top_srcdir)/include $(USB_CFLAGS) -DLIBDIR="\"/usr/local/lib64/sane:$(libdir)/sane\""
+ 
+ AM_LDFLAGS += $(STRICT_LDFLAGS)
+ # The -rpath option is added because we are creating _LTLIBRARIES based
+-- 
+2.23.0
+

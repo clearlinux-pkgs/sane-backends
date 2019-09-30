@@ -4,7 +4,7 @@
 #
 Name     : sane-backends
 Version  : 1.0.27
-Release  : 9
+Release  : 10
 URL      : https://gitlab.com/sane-project/backends/uploads/a3ba9fff29253a94e84074917bff581a/sane-backends-1.0.27.tar.gz
 Source0  : https://gitlab.com/sane-project/backends/uploads/a3ba9fff29253a94e84074917bff581a/sane-backends-1.0.27.tar.gz
 Summary  : Backends for SANE, the universal scanner interface
@@ -18,14 +18,23 @@ Requires: sane-backends-license = %{version}-%{release}
 Requires: sane-backends-locales = %{version}-%{release}
 Requires: sane-backends-man = %{version}-%{release}
 Requires: imagescan
+BuildRequires : automake
+BuildRequires : automake-dev
+BuildRequires : gettext-bin
 BuildRequires : ghostscript
+BuildRequires : imagescan
 BuildRequires : libjpeg-turbo-dev
+BuildRequires : libtool
+BuildRequires : libtool-dev
+BuildRequires : m4
+BuildRequires : pkg-config-dev
 BuildRequires : pkgconfig(libsystemd)
 BuildRequires : pkgconfig(libusb-1.0)
 BuildRequires : pkgconfig(libv4l1)
 BuildRequires : systemd-dev
 BuildRequires : tiff-dev
 Patch1: 0001-Add-stateless-support.patch
+Patch2: 0002-Search-for-backends-in-usr-local-lib64-sane.patch
 
 %description
 How to configure, build, and install SANE.
@@ -122,13 +131,14 @@ man components for the sane-backends package.
 %prep
 %setup -q -n sane-backends-1.0.27
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1562185930
+export SOURCE_DATE_EPOCH=1569858206
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -137,7 +147,7 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
-%configure --disable-static --disable-avahi
+%reconfigure --disable-static --disable-avahi
 make  %{?_smp_mflags}
 
 %check
@@ -148,7 +158,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1562185930
+export SOURCE_DATE_EPOCH=1569858206
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sane-backends
 cp COPYING %{buildroot}/usr/share/package-licenses/sane-backends/COPYING

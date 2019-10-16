@@ -1,4 +1,4 @@
-From e7005c4173341d7a63c3cd41c8623b07fda4773a Mon Sep 17 00:00:00 2001
+From 0e052bc0edcb9108527c79cfe535dd646aebd617 Mon Sep 17 00:00:00 2001
 From: "Brett T. Warden" <brett.t.warden@intel.com>
 Date: Fri, 27 Sep 2019 12:20:17 -0700
 Subject: [PATCH 2/2] Search for backends in /usr/local/lib64/sane
@@ -30,10 +30,11 @@ LD_LIBRARY_PATH; the backend loader will prepend that to LIBDIR, so this
 is just making it a default behavior.
 ---
  backend/Makefile.am | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ backend/Makefile.in | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/backend/Makefile.am b/backend/Makefile.am
-index f7fb403..68325b8 100644
+index 44d1e17..91b08de 100644
 --- a/backend/Makefile.am
 +++ b/backend/Makefile.am
 @@ -4,7 +4,7 @@
@@ -45,6 +46,19 @@ index f7fb403..68325b8 100644
  
  AM_LDFLAGS += $(STRICT_LDFLAGS)
  # The -rpath option is added because we are creating _LTLIBRARIES based
+diff --git a/backend/Makefile.in b/backend/Makefile.in
+index 9fa8131..317e3bb 100644
+--- a/backend/Makefile.in
++++ b/backend/Makefile.in
+@@ -1826,7 +1826,7 @@ AMTAR = @AMTAR@
+ AM_CFLAGS = @AM_CFLAGS@
+ AM_CPPFLAGS = @AM_CPPFLAGS@ -I. -I$(srcdir) -I$(top_builddir)/include \
+ 	-I$(top_srcdir)/include $(USB_CFLAGS) \
+-	-DLIBDIR="\"$(libdir)/sane\""
++	-DLIBDIR="\"/usr/local/lib64/sane:$(libdir)/sane\""
+ AM_CXXFLAGS = @AM_CXXFLAGS@
+ AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
+ AM_LDFLAGS = @AM_LDFLAGS@ $(STRICT_LDFLAGS)
 -- 
 2.23.0
 

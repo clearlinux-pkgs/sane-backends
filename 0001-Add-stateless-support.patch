@@ -1,4 +1,4 @@
-From cae2b341c35f35fd7bff7c9809c348cd0be5143e Mon Sep 17 00:00:00 2001
+From 43ab78db04387d0ff1334c0008b44b52cee35527 Mon Sep 17 00:00:00 2001
 From: "Brett T. Warden" <brett.t.warden@intel.com>
 Date: Fri, 7 Jun 2019 08:56:40 -0700
 Subject: [PATCH 1/2] Add stateless support
@@ -8,7 +8,7 @@ Subject: [PATCH 1/2] Add stateless support
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/sanei/sanei_config.c b/sanei/sanei_config.c
-index c158766..ae901e9 100644
+index 0eaee9a..558821c 100644
 --- a/sanei/sanei_config.c
 +++ b/sanei/sanei_config.c
 @@ -67,7 +67,7 @@

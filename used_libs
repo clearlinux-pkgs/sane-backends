@@ -9,3 +9,4 @@ libsystemd.so.0
 libtiff.so.5
 libusb-1.0.so.0
 libv4l1.so.0
+libxml2.so.2

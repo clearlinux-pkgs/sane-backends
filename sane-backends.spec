@@ -4,7 +4,7 @@
 #
 Name     : sane-backends
 Version  : 1.0.29
-Release  : 12
+Release  : 13
 URL      : https://gitlab.com/sane-project/backends/uploads/54f858b20a364fc35d820df935a86478/sane-backends-1.0.29.tar.gz
 Source0  : https://gitlab.com/sane-project/backends/uploads/54f858b20a364fc35d820df935a86478/sane-backends-1.0.29.tar.gz
 Summary  : Backends for SANE, the universal scanner interface

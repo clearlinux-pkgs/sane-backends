@@ -1,5 +1,5 @@
 PKG_NAME := sane-backends
-URL = https://gitlab.com/sane-project/backends/uploads/c3dd60c9e054b5dee1e7b01a7edc98b0/sane-backends-1.0.30.tar.gz
+URL = https://gitlab.com/sane-project/backends/uploads/8bf1cae2e1803aefab9e5331550e5d5d/sane-backends-1.0.31.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common

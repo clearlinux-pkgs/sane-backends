@@ -1,10 +1,11 @@
 Configure miss: sane-config
 Configure miss: le32toh in machine/endian.h
 Configure miss: swap32 in machine/endian.h
-Configure miss: png_init_io in -lpng
 Configure miss: ieee1284.h usability
 Configure miss: ieee1284.h presence
 Configure miss: ieee1284.h
+Configure miss: whether to enable device locking
+Configure miss: AVAHI
 Configure miss: sane_init in -lsane
 Configure miss: net-snmp-config
 Configure miss: snmp_timeout in -lnetsnmp
@@ -99,6 +100,3 @@ Configure miss: ddk/ntddscsi.h
 Configure miss: scsireq_enter in -lscsi
 Configure miss: cam_open_device in -lcam
 Configure miss: scsireq_enter
-Configure miss: fig2dev
-Configure miss: dlh
-Configure miss: ppmtogif

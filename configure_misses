@@ -1,102 +1,47 @@
-Configure miss: sane-config
-Configure miss: le32toh in machine/endian.h
-Configure miss: swap32 in machine/endian.h
-Configure miss: ieee1284.h usability
-Configure miss: ieee1284.h presence
-Configure miss: ieee1284.h
-Configure miss: whether to enable device locking
-Configure miss: AVAHI
-Configure miss: sane_init in -lsane
-Configure miss: net-snmp-config
-Configure miss: snmp_timeout in -lnetsnmp
-Configure miss: proper SNMP version
-Configure miss: libc.h usability
-Configure miss: libc.h presence
-Configure miss: libc.h
-Configure miss: sys/dsreq.h usability
-Configure miss: sys/dsreq.h presence
-Configure miss: sys/dsreq.h
-Configure miss: sys/scanio.h usability
-Configure miss: sys/scanio.h presence
-Configure miss: sys/scanio.h
-Configure miss: os2.h usability
-Configure miss: os2.h presence
-Configure miss: os2.h
-Configure miss: sys/hw.h usability
-Configure miss: sys/hw.h presence
-Configure miss: sys/hw.h
-Configure miss: dev/ppbus/ppi.h usability
-Configure miss: dev/ppbus/ppi.h presence
-Configure miss: dev/ppbus/ppi.h
-Configure miss: machine/cpufunc.h usability
-Configure miss: machine/cpufunc.h presence
-Configure miss: machine/cpufunc.h
-Configure miss: be/kernel/OS.h usability
-Configure miss: be/kernel/OS.h presence
-Configure miss: be/kernel/OS.h
-Configure miss: asm/io.h
-Configure miss: winsock2.h usability
-Configure miss: winsock2.h presence
-Configure miss: resmgr.h usability
-Configure miss: resmgr.h presence
-Configure miss: resmgr.h
-Configure miss: union semun in <sys/sem.h>
-Configure miss: i386_set_ioperm
-Configure miss: _portaccess
-Configure miss: IOKit/scsi/SCSITaskLib.h usability
-Configure miss: IOKit/scsi/SCSITaskLib.h presence
-Configure miss: IOKit/scsi/SCSITaskLib.h
-Configure miss: IOKit/cdb/IOSCSILib.h usability
-Configure miss: IOKit/cdb/IOSCSILib.h presence
 Configure miss: IOKit/cdb/IOSCSILib.h
-Configure miss: IOKit/scsi/SCSICommandOperationCodes.h usability
-Configure miss: IOKit/scsi/SCSICommandOperationCodes.h presence
-Configure miss: IOKit/scsi/SCSICommandOperationCodes.h
-Configure miss: IOKit/scsi-commands/SCSICommandOperationCodes.h usability
-Configure miss: IOKit/scsi-commands/SCSICommandOperationCodes.h presence
 Configure miss: IOKit/scsi-commands/SCSICommandOperationCodes.h
-Configure miss: scsi.h usability
-Configure miss: scsi.h presence
-Configure miss: scsi.h
-Configure miss: sys/scsi.h usability
-Configure miss: sys/scsi.h presence
-Configure miss: sys/scsi.h
-Configure miss: sys/scsicmd.h usability
-Configure miss: sys/scsicmd.h presence
-Configure miss: sys/scsicmd.h
-Configure miss: sys/scsiio.h usability
-Configure miss: sys/scsiio.h presence
-Configure miss: sys/scsiio.h
-Configure miss: bsd/dev/scsireg.h usability
-Configure miss: bsd/dev/scsireg.h presence
-Configure miss: bsd/dev/scsireg.h
-Configure miss: camlib.h usability
-Configure miss: camlib.h presence
-Configure miss: camlib.h
-Configure miss: gscdds.h usability
-Configure miss: gscdds.h presence
-Configure miss: gscdds.h
-Configure miss: sys/scsi/scsi.h usability
-Configure miss: sys/scsi/scsi.h presence
-Configure miss: sys/scsi/scsi.h
-Configure miss: sys/scsi/sgdefs.h usability
-Configure miss: sys/scsi/sgdefs.h presence
-Configure miss: sys/scsi/sgdefs.h
-Configure miss: sys/scsi/targets/scgio.h usability
-Configure miss: sys/scsi/targets/scgio.h presence
-Configure miss: sys/scsi/targets/scgio.h
-Configure miss: apollo/scsi.h usability
-Configure miss: apollo/scsi.h presence
+Configure miss: IOKit/scsi/SCSICommandOperationCodes.h
+Configure miss: IOKit/scsi/SCSITaskLib.h
+Configure miss: _portaccess
 Configure miss: apollo/scsi.h
-Configure miss: sys/sdi_comm.h usability
-Configure miss: sys/sdi_comm.h presence
-Configure miss: sys/sdi_comm.h
-Configure miss: sys/passthrudef.h usability
-Configure miss: sys/passthrudef.h presence
-Configure miss: sys/passthrudef.h
-Configure miss: io/cam/cam.h
-Configure miss: ntddscsi.h
-Configure miss: ddk/ntddscsi.h
-Configure miss: scsireq_enter in -lscsi
+Configure miss: asm/io.h
+Configure miss: avahi-client >= 0.6.24
+Configure miss: be/kernel/OS.h
+Configure miss: bsd/dev/scsireg.h
 Configure miss: cam_open_device in -lcam
+Configure miss: camlib.h
+Configure miss: ddk/ntddscsi.h
+Configure miss: dev/ppbus/ppi.h
+Configure miss: g++ option to enable C++11 features
+Configure miss: gscdds.h
+Configure miss: i386_set_ioperm
+Configure miss: ieee1284.h
+Configure miss: io/cam/cam.h
+Configure miss: le32toh in machine/endian.h
+Configure miss: libc.h
+Configure miss: machine/cpufunc.h
+Configure miss: net-snmp-config
+Configure miss: ntddscsi.h
+Configure miss: os2.h
+Configure miss: proper SNMP version
+Configure miss: resmgr.h
+Configure miss: sane-config
+Configure miss: sane_init in -lsane
+Configure miss: scsi.h
 Configure miss: scsireq_enter
+Configure miss: scsireq_enter in -lscsi
+Configure miss: snmp_timeout in -lnetsnmp
+Configure miss: swap32 in machine/endian.h
+Configure miss: sys/dsreq.h
+Configure miss: sys/hw.h
+Configure miss: sys/passthrudef.h
+Configure miss: sys/scanio.h
+Configure miss: sys/scsi.h
+Configure miss: sys/scsi/scsi.h
+Configure miss: sys/scsi/sgdefs.h
+Configure miss: sys/scsi/targets/scgio.h
+Configure miss: sys/scsicmd.h
+Configure miss: sys/scsiio.h
+Configure miss: sys/sdi_comm.h
+Configure miss: union semun in <sys/sem.h>
+Configure miss: whether to enable device locking

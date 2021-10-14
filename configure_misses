@@ -1,47 +1,94 @@
 Configure miss: IOKit/cdb/IOSCSILib.h
+Configure miss: IOKit/cdb/IOSCSILib.h
+Configure miss: IOKit/scsi-commands/SCSICommandOperationCodes.h
 Configure miss: IOKit/scsi-commands/SCSICommandOperationCodes.h
 Configure miss: IOKit/scsi/SCSICommandOperationCodes.h
+Configure miss: IOKit/scsi/SCSICommandOperationCodes.h
+Configure miss: IOKit/scsi/SCSITaskLib.h
 Configure miss: IOKit/scsi/SCSITaskLib.h
 Configure miss: _portaccess
+Configure miss: _portaccess
+Configure miss: apollo/scsi.h
 Configure miss: apollo/scsi.h
 Configure miss: asm/io.h
+Configure miss: asm/io.h
+Configure miss: avahi-client >= 0.6.24
 Configure miss: avahi-client >= 0.6.24
 Configure miss: be/kernel/OS.h
+Configure miss: be/kernel/OS.h
+Configure miss: bsd/dev/scsireg.h
 Configure miss: bsd/dev/scsireg.h
 Configure miss: cam_open_device in -lcam
+Configure miss: cam_open_device in -lcam
+Configure miss: camlib.h
 Configure miss: camlib.h
 Configure miss: ddk/ntddscsi.h
+Configure miss: ddk/ntddscsi.h
+Configure miss: dev/ppbus/ppi.h
 Configure miss: dev/ppbus/ppi.h
 Configure miss: g++ option to enable C++11 features
+Configure miss: g++ option to enable C++11 features
+Configure miss: gscdds.h
 Configure miss: gscdds.h
 Configure miss: i386_set_ioperm
+Configure miss: i386_set_ioperm
+Configure miss: ieee1284.h
 Configure miss: ieee1284.h
 Configure miss: io/cam/cam.h
+Configure miss: io/cam/cam.h
+Configure miss: le32toh in machine/endian.h
 Configure miss: le32toh in machine/endian.h
 Configure miss: libc.h
+Configure miss: libc.h
+Configure miss: machine/cpufunc.h
 Configure miss: machine/cpufunc.h
 Configure miss: net-snmp-config
+Configure miss: net-snmp-config
+Configure miss: ntddscsi.h
 Configure miss: ntddscsi.h
 Configure miss: os2.h
+Configure miss: os2.h
+Configure miss: proper SNMP version
 Configure miss: proper SNMP version
 Configure miss: resmgr.h
+Configure miss: resmgr.h
+Configure miss: sane-config
 Configure miss: sane-config
 Configure miss: sane_init in -lsane
+Configure miss: sane_init in -lsane
+Configure miss: scsi.h
 Configure miss: scsi.h
 Configure miss: scsireq_enter
+Configure miss: scsireq_enter
+Configure miss: scsireq_enter in -lscsi
 Configure miss: scsireq_enter in -lscsi
 Configure miss: snmp_timeout in -lnetsnmp
+Configure miss: snmp_timeout in -lnetsnmp
+Configure miss: swap32 in machine/endian.h
 Configure miss: swap32 in machine/endian.h
 Configure miss: sys/dsreq.h
+Configure miss: sys/dsreq.h
+Configure miss: sys/hw.h
 Configure miss: sys/hw.h
 Configure miss: sys/passthrudef.h
+Configure miss: sys/passthrudef.h
+Configure miss: sys/scanio.h
 Configure miss: sys/scanio.h
 Configure miss: sys/scsi.h
+Configure miss: sys/scsi.h
+Configure miss: sys/scsi/scsi.h
 Configure miss: sys/scsi/scsi.h
 Configure miss: sys/scsi/sgdefs.h
+Configure miss: sys/scsi/sgdefs.h
+Configure miss: sys/scsi/targets/scgio.h
 Configure miss: sys/scsi/targets/scgio.h
 Configure miss: sys/scsicmd.h
+Configure miss: sys/scsicmd.h
+Configure miss: sys/scsiio.h
 Configure miss: sys/scsiio.h
 Configure miss: sys/sdi_comm.h
+Configure miss: sys/sdi_comm.h
 Configure miss: union semun in <sys/sem.h>
+Configure miss: union semun in <sys/sem.h>
+Configure miss: whether to enable device locking
 Configure miss: whether to enable device locking

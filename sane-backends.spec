@@ -4,7 +4,7 @@
 #
 Name     : sane-backends
 Version  : 1.0.32
-Release  : 16
+Release  : 17
 URL      : https://gitlab.com/sane-project/backends/uploads/104f09c07d35519cc8e72e604f11643f/sane-backends-1.0.32.tar.gz
 Source0  : https://gitlab.com/sane-project/backends/uploads/104f09c07d35519cc8e72e604f11643f/sane-backends-1.0.32.tar.gz
 Summary  : Backends for SANE, the universal scanner interface
@@ -13,6 +13,7 @@ License  : GPL-2.0
 Requires: sane-backends-bin = %{version}-%{release}
 Requires: sane-backends-config = %{version}-%{release}
 Requires: sane-backends-data = %{version}-%{release}
+Requires: sane-backends-filemap = %{version}-%{release}
 Requires: sane-backends-lib = %{version}-%{release}
 Requires: sane-backends-license = %{version}-%{release}
 Requires: sane-backends-locales = %{version}-%{release}
@@ -47,6 +48,7 @@ Group: Binaries
 Requires: sane-backends-data = %{version}-%{release}
 Requires: sane-backends-config = %{version}-%{release}
 Requires: sane-backends-license = %{version}-%{release}
+Requires: sane-backends-filemap = %{version}-%{release}
 
 %description bin
 bin components for the sane-backends package.
@@ -90,11 +92,20 @@ Requires: sane-backends-man = %{version}-%{release}
 doc components for the sane-backends package.
 
 
+%package filemap
+Summary: filemap components for the sane-backends package.
+Group: Default
+
+%description filemap
+filemap components for the sane-backends package.
+
+
 %package lib
 Summary: lib components for the sane-backends package.
 Group: Libraries
 Requires: sane-backends-data = %{version}-%{release}
 Requires: sane-backends-license = %{version}-%{release}
+Requires: sane-backends-filemap = %{version}-%{release}
 
 %description lib
 lib components for the sane-backends package.
@@ -129,36 +140,53 @@ man components for the sane-backends package.
 cd %{_builddir}/sane-backends-1.0.32
 %patch1 -p1
 %patch2 -p1
+pushd ..
+cp -a sane-backends-1.0.32 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1616611207
+export SOURCE_DATE_EPOCH=1634255587
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %autogen --disable-static --disable-avahi
 make  %{?_smp_mflags}
 
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+%autogen --disable-static --disable-avahi
+make  %{?_smp_mflags}
+popd
 %check
 export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
+cd ../buildavx2;
+make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1616611207
+export SOURCE_DATE_EPOCH=1634255587
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sane-backends
 cp %{_builddir}/sane-backends-1.0.32/COPYING %{buildroot}/usr/share/package-licenses/sane-backends/4cc77b90af91e615a64ae04893fdffa7939db84c
+pushd ../buildavx2/
+%make_install_v3
+popd
 %make_install
 %find_lang sane-backends
 ## install_append content
@@ -167,6 +195,7 @@ mv %{buildroot}/etc/sane.d/* %{buildroot}/usr/share/defaults/sane/
 mkdir -p %{buildroot}/usr/lib/udev/rules.d
 install -m0644 tools/udev/libsane.rules %{buildroot}/usr/lib/udev/rules.d/60-libsane.rules
 ## install_append end
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -179,6 +208,7 @@ install -m0644 tools/udev/libsane.rules %{buildroot}/usr/lib/udev/rules.d/60-lib
 /usr/bin/saned
 /usr/bin/scanimage
 /usr/bin/umax_pp
+/usr/share/clear/optimized-elf/bin*
 
 %files config
 %defattr(-,root,root,-)
@@ -274,6 +304,10 @@ install -m0644 tools/udev/libsane.rules %{buildroot}/usr/lib/udev/rules.d/60-lib
 %files doc
 %defattr(0644,root,root,0755)
 %doc /usr/share/doc/sane\-backends/*
+
+%files filemap
+%defattr(-,root,root,-)
+/usr/share/clear/filemap/filemap-sane-backends
 
 %files lib
 %defattr(-,root,root,-)
@@ -537,6 +571,7 @@ install -m0644 tools/udev/libsane.rules %{buildroot}/usr/lib/udev/rules.d/60-lib
 /usr/lib64/sane/libsane-xerox_mfp.so
 /usr/lib64/sane/libsane-xerox_mfp.so.1
 /usr/lib64/sane/libsane-xerox_mfp.so.1.0.32
+/usr/share/clear/optimized-elf/lib*
 
 %files license
 %defattr(0644,root,root,0755)

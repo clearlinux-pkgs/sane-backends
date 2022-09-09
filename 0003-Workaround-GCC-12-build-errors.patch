@@ -1,0 +1,38 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Patrick McCarty <patrick.mccarty@intel.com>
+Date: Fri, 9 Sep 2022 03:56:29 +0000
+Subject: [PATCH] Workaround GCC 12 build errors
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+The errors are of the form:
+
+minigtest.h:43:29: error: no match for ‘operator<<’ (operand types are ‘std::basic_ostream<char>’ and ‘const std::vector<short unsigned int>’)
+   43 |         std::cerr << " :\n" << t << " != " << u << "\n\n";
+      |         ~~~~~~~~~~~~~~~~~~~~^~~~
+
+The affected statement from the templated function `check_equal` can be
+disabled without ill effect, since it is simply printing more specifics
+about the failure case, and at the moment, all tests pass.
+
+Bug report: https://gitlab.com/sane-project/backends/-/issues/597
+
+Signed-off-by: Patrick McCarty <patrick.mccarty@intel.com>
+---
+ testsuite/backend/genesys/minigtest.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/testsuite/backend/genesys/minigtest.h b/testsuite/backend/genesys/minigtest.h
+index 4273eed..ccd2a8d 100644
+--- a/testsuite/backend/genesys/minigtest.h
++++ b/testsuite/backend/genesys/minigtest.h
+@@ -40,7 +40,7 @@ void check_equal(const T& t, const U& u, const char* function, const char* path,
+         s_num_failures++;
+         std::cerr << "FAILURE at ";
+         print_location(std::cerr, function, path, line);
+-        std::cerr << " :\n" << t << " != " << u << "\n\n";
++        //std::cerr << " :\n" << t << " != " << u << "\n\n";
+     } else {
+         s_num_successes++;
+         std::cerr << "SUCCESS at ";

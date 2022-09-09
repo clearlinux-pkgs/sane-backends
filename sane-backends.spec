@@ -4,7 +4,7 @@
 #
 Name     : sane-backends
 Version  : 1.0.32
-Release  : 22
+Release  : 23
 URL      : https://gitlab.com/sane-project/backends/uploads/104f09c07d35519cc8e72e604f11643f/sane-backends-1.0.32.tar.gz
 Source0  : https://gitlab.com/sane-project/backends/uploads/104f09c07d35519cc8e72e604f11643f/sane-backends-1.0.32.tar.gz
 Summary  : Backends for SANE, the universal scanner interface
@@ -20,7 +20,6 @@ Requires: sane-backends-locales = %{version}-%{release}
 Requires: sane-backends-man = %{version}-%{release}
 Requires: imagescan
 BuildRequires : autoconf-archive-dev
-BuildRequires : imagescan
 BuildRequires : libjpeg-turbo-dev
 BuildRequires : pkgconfig(libcurl)
 BuildRequires : pkgconfig(libsystemd)
@@ -32,6 +31,7 @@ BuildRequires : systemd-dev
 BuildRequires : tiff-dev
 Patch1: 0001-Add-stateless-support.patch
 Patch2: 0002-Search-for-backends-in-usr-local-lib64-sane.patch
+Patch3: 0003-Workaround-GCC-12-build-errors.patch
 
 %description
 How to configure, build, and install SANE.
@@ -140,6 +140,7 @@ man components for the sane-backends package.
 cd %{_builddir}/sane-backends-1.0.32
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 pushd ..
 cp -a sane-backends-1.0.32 buildavx2
 popd
@@ -149,7 +150,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1634255587
+export SOURCE_DATE_EPOCH=1662698251
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -162,9 +163,9 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 make  %{?_smp_mflags}
 
 pushd ../buildavx2/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 "
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 "
-export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 "
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
 %autogen --disable-static --disable-avahi
@@ -180,10 +181,10 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1634255587
+export SOURCE_DATE_EPOCH=1662698251
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sane-backends
-cp %{_builddir}/sane-backends-1.0.32/COPYING %{buildroot}/usr/share/package-licenses/sane-backends/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/sane-backends-%{version}/COPYING %{buildroot}/usr/share/package-licenses/sane-backends/4cc77b90af91e615a64ae04893fdffa7939db84c
 pushd ../buildavx2/
 %make_install_v3
 popd
@@ -195,7 +196,7 @@ mv %{buildroot}/etc/sane.d/* %{buildroot}/usr/share/defaults/sane/
 mkdir -p %{buildroot}/usr/lib/udev/rules.d
 install -m0644 tools/udev/libsane.rules %{buildroot}/usr/lib/udev/rules.d/60-libsane.rules
 ## install_append end
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -298,6 +299,7 @@ install -m0644 tools/udev/libsane.rules %{buildroot}/usr/lib/udev/rules.d/60-lib
 %defattr(-,root,root,-)
 /usr/include/sane/sane.h
 /usr/include/sane/saneopts.h
+/usr/lib64/glibc-hwcaps/x86-64-v3/libsane.so
 /usr/lib64/libsane.so
 /usr/lib64/pkgconfig/sane-backends.pc
 
@@ -311,6 +313,8 @@ install -m0644 tools/udev/libsane.rules %{buildroot}/usr/lib/udev/rules.d/60-lib
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/glibc-hwcaps/x86-64-v3/libsane.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libsane.so.1.0.32
 /usr/lib64/libsane.so.1
 /usr/lib64/libsane.so.1.0.32
 /usr/lib64/sane/libsane-abaton.so
@@ -571,7 +575,7 @@ install -m0644 tools/udev/libsane.rules %{buildroot}/usr/lib/udev/rules.d/60-lib
 /usr/lib64/sane/libsane-xerox_mfp.so
 /usr/lib64/sane/libsane-xerox_mfp.so.1
 /usr/lib64/sane/libsane-xerox_mfp.so.1.0.32
-/usr/share/clear/optimized-elf/lib*
+/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)

@@ -1,7 +1,7 @@
-From 0e052bc0edcb9108527c79cfe535dd646aebd617 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: "Brett T. Warden" <brett.t.warden@intel.com>
 Date: Fri, 27 Sep 2019 12:20:17 -0700
-Subject: [PATCH 2/2] Search for backends in /usr/local/lib64/sane
+Subject: [PATCH] Search for backends in /usr/local/lib64/sane
 
 The scanner driver backends provided with sane-backends are installed
 under /usr/lib64/sane, and that's where sane will search for them. With
@@ -34,7 +34,7 @@ is just making it a default behavior.
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/backend/Makefile.am b/backend/Makefile.am
-index 44d1e17..91b08de 100644
+index 48a1393..a64a1de 100644
 --- a/backend/Makefile.am
 +++ b/backend/Makefile.am
 @@ -4,7 +4,7 @@
@@ -47,10 +47,10 @@ index 44d1e17..91b08de 100644
  AM_LDFLAGS += $(STRICT_LDFLAGS)
  # The -rpath option is added because we are creating _LTLIBRARIES based
 diff --git a/backend/Makefile.in b/backend/Makefile.in
-index 9fa8131..317e3bb 100644
+index 2e03507..4571c69 100644
 --- a/backend/Makefile.in
 +++ b/backend/Makefile.in
-@@ -1826,7 +1826,7 @@ AMTAR = @AMTAR@
+@@ -2205,7 +2205,7 @@ AMTAR = @AMTAR@
  AM_CFLAGS = @AM_CFLAGS@
  AM_CPPFLAGS = @AM_CPPFLAGS@ -I. -I$(srcdir) -I$(top_builddir)/include \
  	-I$(top_srcdir)/include $(USB_CFLAGS) \
@@ -59,6 +59,3 @@ index 9fa8131..317e3bb 100644
  AM_CXXFLAGS = @AM_CXXFLAGS@
  AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
  AM_LDFLAGS = @AM_LDFLAGS@ $(STRICT_LDFLAGS)
--- 
-2.23.0
-

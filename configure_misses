@@ -42,14 +42,10 @@ Configure miss: libc.h
 Configure miss: libc.h
 Configure miss: machine/cpufunc.h
 Configure miss: machine/cpufunc.h
-Configure miss: net-snmp-config
-Configure miss: net-snmp-config
 Configure miss: ntddscsi.h
 Configure miss: ntddscsi.h
 Configure miss: os2.h
 Configure miss: os2.h
-Configure miss: proper SNMP version
-Configure miss: proper SNMP version
 Configure miss: resmgr.h
 Configure miss: resmgr.h
 Configure miss: sane-config
@@ -62,8 +58,6 @@ Configure miss: scsireq_enter
 Configure miss: scsireq_enter
 Configure miss: scsireq_enter in -lscsi
 Configure miss: scsireq_enter in -lscsi
-Configure miss: snmp_timeout in -lnetsnmp
-Configure miss: snmp_timeout in -lnetsnmp
 Configure miss: swap32 in machine/endian.h
 Configure miss: swap32 in machine/endian.h
 Configure miss: sys/dsreq.h
@@ -90,7 +84,5 @@ Configure miss: sys/sdi_comm.h
 Configure miss: sys/sdi_comm.h
 Configure miss: union semun in <sys/sem.h>
 Configure miss: union semun in <sys/sem.h>
-Configure miss: whether to enable device locking
-Configure miss: whether to enable device locking
 Configure miss: x86_64-generic-linux-gnu-file
 Configure miss: x86_64-generic-linux-gnu-file

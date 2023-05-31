@@ -5,7 +5,7 @@
 #
 Name     : sane-backends
 Version  : 1.2.1
-Release  : 31
+Release  : 32
 URL      : https://gitlab.com/sane-project/backends/uploads/110fc43336d0fb5e514f1fdc7360dd87/sane-backends-1.2.1.tar.gz
 Source0  : https://gitlab.com/sane-project/backends/uploads/110fc43336d0fb5e514f1fdc7360dd87/sane-backends-1.2.1.tar.gz
 Summary  : Backends for SANE, the universal scanner interface
@@ -144,7 +144,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683826816
+export SOURCE_DATE_EPOCH=1685507057
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -175,7 +175,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1683826816
+export SOURCE_DATE_EPOCH=1685507057
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sane-backends
 cp %{_builddir}/sane-backends-%{version}/COPYING %{buildroot}/usr/share/package-licenses/sane-backends/4cc77b90af91e615a64ae04893fdffa7939db84c || :
@@ -295,7 +295,6 @@ install -m0644 tools/udev/libsane.rules %{buildroot}/usr/lib/udev/rules.d/60-lib
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libsane.so
 /usr/include/sane/sane.h
 /usr/include/sane/saneopts.h
 /usr/lib64/libsane.so
@@ -307,265 +306,92 @@ install -m0644 tools/udev/libsane.rules %{buildroot}/usr/lib/udev/rules.d/60-lib
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libsane.so.1
 /V3/usr/lib64/libsane.so.1.2.1
-/V3/usr/lib64/sane/libsane-abaton.so
-/V3/usr/lib64/sane/libsane-abaton.so.1
 /V3/usr/lib64/sane/libsane-abaton.so.1.2.1
-/V3/usr/lib64/sane/libsane-agfafocus.so
-/V3/usr/lib64/sane/libsane-agfafocus.so.1
 /V3/usr/lib64/sane/libsane-agfafocus.so.1.2.1
-/V3/usr/lib64/sane/libsane-apple.so
-/V3/usr/lib64/sane/libsane-apple.so.1
 /V3/usr/lib64/sane/libsane-apple.so.1.2.1
-/V3/usr/lib64/sane/libsane-artec.so
-/V3/usr/lib64/sane/libsane-artec.so.1
 /V3/usr/lib64/sane/libsane-artec.so.1.2.1
-/V3/usr/lib64/sane/libsane-artec_eplus48u.so
-/V3/usr/lib64/sane/libsane-artec_eplus48u.so.1
 /V3/usr/lib64/sane/libsane-artec_eplus48u.so.1.2.1
-/V3/usr/lib64/sane/libsane-as6e.so
-/V3/usr/lib64/sane/libsane-as6e.so.1
 /V3/usr/lib64/sane/libsane-as6e.so.1.2.1
-/V3/usr/lib64/sane/libsane-avision.so
-/V3/usr/lib64/sane/libsane-avision.so.1
 /V3/usr/lib64/sane/libsane-avision.so.1.2.1
-/V3/usr/lib64/sane/libsane-bh.so
-/V3/usr/lib64/sane/libsane-bh.so.1
 /V3/usr/lib64/sane/libsane-bh.so.1.2.1
-/V3/usr/lib64/sane/libsane-canon.so
-/V3/usr/lib64/sane/libsane-canon.so.1
 /V3/usr/lib64/sane/libsane-canon.so.1.2.1
-/V3/usr/lib64/sane/libsane-canon630u.so
-/V3/usr/lib64/sane/libsane-canon630u.so.1
 /V3/usr/lib64/sane/libsane-canon630u.so.1.2.1
-/V3/usr/lib64/sane/libsane-canon_dr.so
-/V3/usr/lib64/sane/libsane-canon_dr.so.1
 /V3/usr/lib64/sane/libsane-canon_dr.so.1.2.1
-/V3/usr/lib64/sane/libsane-canon_lide70.so
-/V3/usr/lib64/sane/libsane-canon_lide70.so.1
 /V3/usr/lib64/sane/libsane-canon_lide70.so.1.2.1
-/V3/usr/lib64/sane/libsane-cardscan.so
-/V3/usr/lib64/sane/libsane-cardscan.so.1
 /V3/usr/lib64/sane/libsane-cardscan.so.1.2.1
-/V3/usr/lib64/sane/libsane-coolscan.so
-/V3/usr/lib64/sane/libsane-coolscan.so.1
 /V3/usr/lib64/sane/libsane-coolscan.so.1.2.1
-/V3/usr/lib64/sane/libsane-coolscan2.so
-/V3/usr/lib64/sane/libsane-coolscan2.so.1
 /V3/usr/lib64/sane/libsane-coolscan2.so.1.2.1
-/V3/usr/lib64/sane/libsane-coolscan3.so
-/V3/usr/lib64/sane/libsane-coolscan3.so.1
 /V3/usr/lib64/sane/libsane-coolscan3.so.1.2.1
-/V3/usr/lib64/sane/libsane-dc210.so
-/V3/usr/lib64/sane/libsane-dc210.so.1
 /V3/usr/lib64/sane/libsane-dc210.so.1.2.1
-/V3/usr/lib64/sane/libsane-dc240.so
-/V3/usr/lib64/sane/libsane-dc240.so.1
 /V3/usr/lib64/sane/libsane-dc240.so.1.2.1
-/V3/usr/lib64/sane/libsane-dc25.so
-/V3/usr/lib64/sane/libsane-dc25.so.1
 /V3/usr/lib64/sane/libsane-dc25.so.1.2.1
-/V3/usr/lib64/sane/libsane-dell1600n_net.so
-/V3/usr/lib64/sane/libsane-dell1600n_net.so.1
 /V3/usr/lib64/sane/libsane-dell1600n_net.so.1.2.1
-/V3/usr/lib64/sane/libsane-dll.so
-/V3/usr/lib64/sane/libsane-dll.so.1
 /V3/usr/lib64/sane/libsane-dll.so.1.2.1
-/V3/usr/lib64/sane/libsane-dmc.so
-/V3/usr/lib64/sane/libsane-dmc.so.1
 /V3/usr/lib64/sane/libsane-dmc.so.1.2.1
-/V3/usr/lib64/sane/libsane-epjitsu.so
-/V3/usr/lib64/sane/libsane-epjitsu.so.1
 /V3/usr/lib64/sane/libsane-epjitsu.so.1.2.1
-/V3/usr/lib64/sane/libsane-epson.so
-/V3/usr/lib64/sane/libsane-epson.so.1
 /V3/usr/lib64/sane/libsane-epson.so.1.2.1
-/V3/usr/lib64/sane/libsane-epson2.so
-/V3/usr/lib64/sane/libsane-epson2.so.1
 /V3/usr/lib64/sane/libsane-epson2.so.1.2.1
-/V3/usr/lib64/sane/libsane-epsonds.so
-/V3/usr/lib64/sane/libsane-epsonds.so.1
 /V3/usr/lib64/sane/libsane-epsonds.so.1.2.1
-/V3/usr/lib64/sane/libsane-fujitsu.so
-/V3/usr/lib64/sane/libsane-fujitsu.so.1
 /V3/usr/lib64/sane/libsane-fujitsu.so.1.2.1
-/V3/usr/lib64/sane/libsane-genesys.so
-/V3/usr/lib64/sane/libsane-genesys.so.1
 /V3/usr/lib64/sane/libsane-genesys.so.1.2.1
-/V3/usr/lib64/sane/libsane-gt68xx.so
-/V3/usr/lib64/sane/libsane-gt68xx.so.1
 /V3/usr/lib64/sane/libsane-gt68xx.so.1.2.1
-/V3/usr/lib64/sane/libsane-hp.so
-/V3/usr/lib64/sane/libsane-hp.so.1
 /V3/usr/lib64/sane/libsane-hp.so.1.2.1
-/V3/usr/lib64/sane/libsane-hp3500.so
-/V3/usr/lib64/sane/libsane-hp3500.so.1
 /V3/usr/lib64/sane/libsane-hp3500.so.1.2.1
-/V3/usr/lib64/sane/libsane-hp3900.so
-/V3/usr/lib64/sane/libsane-hp3900.so.1
 /V3/usr/lib64/sane/libsane-hp3900.so.1.2.1
-/V3/usr/lib64/sane/libsane-hp4200.so
-/V3/usr/lib64/sane/libsane-hp4200.so.1
 /V3/usr/lib64/sane/libsane-hp4200.so.1.2.1
-/V3/usr/lib64/sane/libsane-hp5400.so
-/V3/usr/lib64/sane/libsane-hp5400.so.1
 /V3/usr/lib64/sane/libsane-hp5400.so.1.2.1
-/V3/usr/lib64/sane/libsane-hp5590.so
-/V3/usr/lib64/sane/libsane-hp5590.so.1
 /V3/usr/lib64/sane/libsane-hp5590.so.1.2.1
-/V3/usr/lib64/sane/libsane-hpljm1005.so
-/V3/usr/lib64/sane/libsane-hpljm1005.so.1
 /V3/usr/lib64/sane/libsane-hpljm1005.so.1.2.1
-/V3/usr/lib64/sane/libsane-hs2p.so
-/V3/usr/lib64/sane/libsane-hs2p.so.1
 /V3/usr/lib64/sane/libsane-hs2p.so.1.2.1
-/V3/usr/lib64/sane/libsane-ibm.so
-/V3/usr/lib64/sane/libsane-ibm.so.1
 /V3/usr/lib64/sane/libsane-ibm.so.1.2.1
-/V3/usr/lib64/sane/libsane-kodak.so
-/V3/usr/lib64/sane/libsane-kodak.so.1
 /V3/usr/lib64/sane/libsane-kodak.so.1.2.1
-/V3/usr/lib64/sane/libsane-kodakaio.so
-/V3/usr/lib64/sane/libsane-kodakaio.so.1
 /V3/usr/lib64/sane/libsane-kodakaio.so.1.2.1
-/V3/usr/lib64/sane/libsane-kvs1025.so
-/V3/usr/lib64/sane/libsane-kvs1025.so.1
 /V3/usr/lib64/sane/libsane-kvs1025.so.1.2.1
-/V3/usr/lib64/sane/libsane-kvs20xx.so
-/V3/usr/lib64/sane/libsane-kvs20xx.so.1
 /V3/usr/lib64/sane/libsane-kvs20xx.so.1.2.1
-/V3/usr/lib64/sane/libsane-kvs40xx.so
-/V3/usr/lib64/sane/libsane-kvs40xx.so.1
 /V3/usr/lib64/sane/libsane-kvs40xx.so.1.2.1
-/V3/usr/lib64/sane/libsane-leo.so
-/V3/usr/lib64/sane/libsane-leo.so.1
 /V3/usr/lib64/sane/libsane-leo.so.1.2.1
-/V3/usr/lib64/sane/libsane-lexmark.so
-/V3/usr/lib64/sane/libsane-lexmark.so.1
 /V3/usr/lib64/sane/libsane-lexmark.so.1.2.1
-/V3/usr/lib64/sane/libsane-ma1509.so
-/V3/usr/lib64/sane/libsane-ma1509.so.1
 /V3/usr/lib64/sane/libsane-ma1509.so.1.2.1
-/V3/usr/lib64/sane/libsane-magicolor.so
-/V3/usr/lib64/sane/libsane-magicolor.so.1
 /V3/usr/lib64/sane/libsane-magicolor.so.1.2.1
-/V3/usr/lib64/sane/libsane-matsushita.so
-/V3/usr/lib64/sane/libsane-matsushita.so.1
 /V3/usr/lib64/sane/libsane-matsushita.so.1.2.1
-/V3/usr/lib64/sane/libsane-microtek.so
-/V3/usr/lib64/sane/libsane-microtek.so.1
 /V3/usr/lib64/sane/libsane-microtek.so.1.2.1
-/V3/usr/lib64/sane/libsane-microtek2.so
-/V3/usr/lib64/sane/libsane-microtek2.so.1
 /V3/usr/lib64/sane/libsane-microtek2.so.1.2.1
-/V3/usr/lib64/sane/libsane-mustek.so
-/V3/usr/lib64/sane/libsane-mustek.so.1
 /V3/usr/lib64/sane/libsane-mustek.so.1.2.1
-/V3/usr/lib64/sane/libsane-mustek_usb.so
-/V3/usr/lib64/sane/libsane-mustek_usb.so.1
 /V3/usr/lib64/sane/libsane-mustek_usb.so.1.2.1
-/V3/usr/lib64/sane/libsane-mustek_usb2.so
-/V3/usr/lib64/sane/libsane-mustek_usb2.so.1
 /V3/usr/lib64/sane/libsane-mustek_usb2.so.1.2.1
-/V3/usr/lib64/sane/libsane-nec.so
-/V3/usr/lib64/sane/libsane-nec.so.1
 /V3/usr/lib64/sane/libsane-nec.so.1.2.1
-/V3/usr/lib64/sane/libsane-net.so
-/V3/usr/lib64/sane/libsane-net.so.1
 /V3/usr/lib64/sane/libsane-net.so.1.2.1
-/V3/usr/lib64/sane/libsane-niash.so
-/V3/usr/lib64/sane/libsane-niash.so.1
 /V3/usr/lib64/sane/libsane-niash.so.1.2.1
-/V3/usr/lib64/sane/libsane-p5.so
-/V3/usr/lib64/sane/libsane-p5.so.1
 /V3/usr/lib64/sane/libsane-p5.so.1.2.1
-/V3/usr/lib64/sane/libsane-pie.so
-/V3/usr/lib64/sane/libsane-pie.so.1
 /V3/usr/lib64/sane/libsane-pie.so.1.2.1
-/V3/usr/lib64/sane/libsane-pieusb.so
-/V3/usr/lib64/sane/libsane-pieusb.so.1
 /V3/usr/lib64/sane/libsane-pieusb.so.1.2.1
-/V3/usr/lib64/sane/libsane-pixma.so
-/V3/usr/lib64/sane/libsane-pixma.so.1
 /V3/usr/lib64/sane/libsane-pixma.so.1.2.1
-/V3/usr/lib64/sane/libsane-plustek.so
-/V3/usr/lib64/sane/libsane-plustek.so.1
 /V3/usr/lib64/sane/libsane-plustek.so.1.2.1
-/V3/usr/lib64/sane/libsane-plustek_pp.so
-/V3/usr/lib64/sane/libsane-plustek_pp.so.1
 /V3/usr/lib64/sane/libsane-plustek_pp.so.1.2.1
-/V3/usr/lib64/sane/libsane-qcam.so
-/V3/usr/lib64/sane/libsane-qcam.so.1
 /V3/usr/lib64/sane/libsane-qcam.so.1.2.1
-/V3/usr/lib64/sane/libsane-ricoh.so
-/V3/usr/lib64/sane/libsane-ricoh.so.1
 /V3/usr/lib64/sane/libsane-ricoh.so.1.2.1
-/V3/usr/lib64/sane/libsane-ricoh2.so
-/V3/usr/lib64/sane/libsane-ricoh2.so.1
 /V3/usr/lib64/sane/libsane-ricoh2.so.1.2.1
-/V3/usr/lib64/sane/libsane-rts8891.so
-/V3/usr/lib64/sane/libsane-rts8891.so.1
 /V3/usr/lib64/sane/libsane-rts8891.so.1.2.1
-/V3/usr/lib64/sane/libsane-s9036.so
-/V3/usr/lib64/sane/libsane-s9036.so.1
 /V3/usr/lib64/sane/libsane-s9036.so.1.2.1
-/V3/usr/lib64/sane/libsane-sceptre.so
-/V3/usr/lib64/sane/libsane-sceptre.so.1
 /V3/usr/lib64/sane/libsane-sceptre.so.1.2.1
-/V3/usr/lib64/sane/libsane-sharp.so
-/V3/usr/lib64/sane/libsane-sharp.so.1
 /V3/usr/lib64/sane/libsane-sharp.so.1.2.1
-/V3/usr/lib64/sane/libsane-sm3600.so
-/V3/usr/lib64/sane/libsane-sm3600.so.1
 /V3/usr/lib64/sane/libsane-sm3600.so.1.2.1
-/V3/usr/lib64/sane/libsane-sm3840.so
-/V3/usr/lib64/sane/libsane-sm3840.so.1
 /V3/usr/lib64/sane/libsane-sm3840.so.1.2.1
-/V3/usr/lib64/sane/libsane-snapscan.so
-/V3/usr/lib64/sane/libsane-snapscan.so.1
 /V3/usr/lib64/sane/libsane-snapscan.so.1.2.1
-/V3/usr/lib64/sane/libsane-sp15c.so
-/V3/usr/lib64/sane/libsane-sp15c.so.1
 /V3/usr/lib64/sane/libsane-sp15c.so.1.2.1
-/V3/usr/lib64/sane/libsane-st400.so
-/V3/usr/lib64/sane/libsane-st400.so.1
 /V3/usr/lib64/sane/libsane-st400.so.1.2.1
-/V3/usr/lib64/sane/libsane-stv680.so
-/V3/usr/lib64/sane/libsane-stv680.so.1
 /V3/usr/lib64/sane/libsane-stv680.so.1.2.1
-/V3/usr/lib64/sane/libsane-tamarack.so
-/V3/usr/lib64/sane/libsane-tamarack.so.1
 /V3/usr/lib64/sane/libsane-tamarack.so.1.2.1
-/V3/usr/lib64/sane/libsane-teco1.so
-/V3/usr/lib64/sane/libsane-teco1.so.1
 /V3/usr/lib64/sane/libsane-teco1.so.1.2.1
-/V3/usr/lib64/sane/libsane-teco2.so
-/V3/usr/lib64/sane/libsane-teco2.so.1
 /V3/usr/lib64/sane/libsane-teco2.so.1.2.1
-/V3/usr/lib64/sane/libsane-teco3.so
-/V3/usr/lib64/sane/libsane-teco3.so.1
 /V3/usr/lib64/sane/libsane-teco3.so.1.2.1
-/V3/usr/lib64/sane/libsane-test.so
-/V3/usr/lib64/sane/libsane-test.so.1
 /V3/usr/lib64/sane/libsane-test.so.1.2.1
-/V3/usr/lib64/sane/libsane-u12.so
-/V3/usr/lib64/sane/libsane-u12.so.1
 /V3/usr/lib64/sane/libsane-u12.so.1.2.1
-/V3/usr/lib64/sane/libsane-umax.so
-/V3/usr/lib64/sane/libsane-umax.so.1
 /V3/usr/lib64/sane/libsane-umax.so.1.2.1
-/V3/usr/lib64/sane/libsane-umax1220u.so
-/V3/usr/lib64/sane/libsane-umax1220u.so.1
 /V3/usr/lib64/sane/libsane-umax1220u.so.1.2.1
-/V3/usr/lib64/sane/libsane-umax_pp.so
-/V3/usr/lib64/sane/libsane-umax_pp.so.1
 /V3/usr/lib64/sane/libsane-umax_pp.so.1.2.1
-/V3/usr/lib64/sane/libsane-v4l.so
-/V3/usr/lib64/sane/libsane-v4l.so.1
 /V3/usr/lib64/sane/libsane-v4l.so.1.2.1
-/V3/usr/lib64/sane/libsane-xerox_mfp.so
-/V3/usr/lib64/sane/libsane-xerox_mfp.so.1
 /V3/usr/lib64/sane/libsane-xerox_mfp.so.1.2.1
 /usr/lib64/libsane.so.1
 /usr/lib64/libsane.so.1.2.1

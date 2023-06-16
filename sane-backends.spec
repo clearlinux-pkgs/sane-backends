@@ -5,7 +5,7 @@
 #
 Name     : sane-backends
 Version  : 1.2.1
-Release  : 32
+Release  : 33
 URL      : https://gitlab.com/sane-project/backends/uploads/110fc43336d0fb5e514f1fdc7360dd87/sane-backends-1.2.1.tar.gz
 Source0  : https://gitlab.com/sane-project/backends/uploads/110fc43336d0fb5e514f1fdc7360dd87/sane-backends-1.2.1.tar.gz
 Summary  : Backends for SANE, the universal scanner interface
@@ -132,9 +132,9 @@ man components for the sane-backends package.
 %prep
 %setup -q -n sane-backends-1.2.1
 cd %{_builddir}/sane-backends-1.2.1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
+%patch -P 3 -p1
 pushd ..
 cp -a sane-backends-1.2.1 buildavx2
 popd
@@ -144,7 +144,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1685507057
+export SOURCE_DATE_EPOCH=1686932152
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -175,7 +175,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1685507057
+export SOURCE_DATE_EPOCH=1686932152
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sane-backends
 cp %{_builddir}/sane-backends-%{version}/COPYING %{buildroot}/usr/share/package-licenses/sane-backends/4cc77b90af91e615a64ae04893fdffa7939db84c || :

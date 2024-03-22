@@ -1,4 +1,4 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 901a7e253ca5ff966b973abd965c8a8c6787d043 Mon Sep 17 00:00:00 2001
 From: "Brett T. Warden" <brett.t.warden@intel.com>
 Date: Fri, 27 Sep 2019 12:20:17 -0700
 Subject: [PATCH] Search for backends in /usr/local/lib64/sane
@@ -29,15 +29,14 @@ A similar behavior can be achieved at runtime by defining
 LD_LIBRARY_PATH; the backend loader will prepend that to LIBDIR, so this
 is just making it a default behavior.
 ---
- backend/Makefile.am | 2 +-
- backend/Makefile.in | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ backend/Makefile.am | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/backend/Makefile.am b/backend/Makefile.am
-index 48a1393..a64a1de 100644
+index 86b1d1f086a1..33f9c04f63f3 100644
 --- a/backend/Makefile.am
 +++ b/backend/Makefile.am
-@@ -4,7 +4,7 @@
+@@ -5,7 +5,7 @@
  ##  This file is part of the "Sane" build infra-structure.  See
  ##  included LICENSE file for license information.
  
@@ -46,16 +45,15 @@ index 48a1393..a64a1de 100644
  
  AM_LDFLAGS += $(STRICT_LDFLAGS)
  # The -rpath option is added because we are creating _LTLIBRARIES based
-diff --git a/backend/Makefile.in b/backend/Makefile.in
-index 2e03507..4571c69 100644
---- a/backend/Makefile.in
-+++ b/backend/Makefile.in
-@@ -2205,7 +2205,7 @@ AMTAR = @AMTAR@
- AM_CFLAGS = @AM_CFLAGS@
- AM_CPPFLAGS = @AM_CPPFLAGS@ -I. -I$(srcdir) -I$(top_builddir)/include \
- 	-I$(top_srcdir)/include $(USB_CFLAGS) \
--	-DLIBDIR="\"$(libdir)/sane\""
-+	-DLIBDIR="\"/usr/local/lib64/sane:$(libdir)/sane\""
- AM_CXXFLAGS = @AM_CXXFLAGS@
- AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
- AM_LDFLAGS = @AM_LDFLAGS@ $(STRICT_LDFLAGS)
+@@ -100,7 +100,7 @@ SUFFIXES = .conf.in .conf
+ 	@sed -e 's|@DATADIR@|$(datadir)|g' \
+ 	     -e 's|@CONFIGDIR@|$(configdir)|g' \
+ 	     -e 's|@DOCDIR@|$(docdir)|g' \
+-	     -e 's|@LIBDIR@|$(libdir)/sane|g' \
++	     -e 's|@LIBDIR@|/usr/local/lib64/sane:$(libdir)/sane|g' \
+ 	     -e 's|@BINDIR@|$(bindir)|g' \
+ 	     -e 's|@SBINDIR@|$(sbindir)|g' \
+ 	     -e 's|@PACKAGEVERSION@|$(PACKAGE_VERSION)|g' $? > $@
+-- 
+2.44.0
+

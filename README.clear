@@ -1,1 +1,8 @@
-Whenever updating this package to a new release, re-autospec imagescan as well.
+=== Stateless ===
+This package has been modified to support configuration in /usr/share/defaults/sane *and* /etc/sane, however, the upstream code
+does not implement layering, so higher-precedence files will *replace* system defaults, not augment them.
+For example, if you add a driver in /etc/sane.d/dll.d/<drivername>, sane will *ignore* all drivers listed in
+/usr/share/sane/dll.d/*. As a workaround, you can symlink or copy those driver config files you need into /etc/sane.d/dll.d/
+manually.
+Supporting augmentive/layered configuration will require reworking at least read_dlld() (in backend/dll.c) and
+sanei_config_open() (in sanei/sanei_config.c), and possibly others.

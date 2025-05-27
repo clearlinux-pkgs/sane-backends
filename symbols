@@ -1,4 +1,3 @@
-libsane.so.1:fail_test
 libsane.so.1:md5_buffer
 libsane.so.1:md5_finish_ctx
 libsane.so.1:md5_init_ctx

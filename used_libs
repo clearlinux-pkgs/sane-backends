@@ -3,8 +3,10 @@ libgcc_s.so.1
 libjpeg.so.62
 libm.so.6
 libnetsnmp.so.40
+libpng16.so.16
 libstdc++.so.6
+libsystemd.so.0
 libtiff.so.6
 libusb-1.0.so.0
 libv4l1.so.0
-libxml2.so.2
+libxml2.so.16
